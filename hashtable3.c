@@ -2,7 +2,7 @@
 #include "hashtable.h"
 #include "stack.h"
 
-int hash(const char *name) { // Hash a key
+int hash(const char *name) {
     int hash = 0;
 
     while (*name) {     // Add ascii value of each char
@@ -14,7 +14,7 @@ int hash(const char *name) { // Hash a key
 
 
 
-int addHM(HashMap *root, node *player, int HashedKey) { // Add in HM using hashed key
+int addHM(HashMap *root, node *player, int HashedKey) {
     if (root == NULL){
         printf("\e[0;31mProblem in addHM, root is NULL\e[0;37m\n");
         return 0;
@@ -33,7 +33,7 @@ int addHM(HashMap *root, node *player, int HashedKey) { // Add in HM using hashe
 
 
 
-node *getHM(HashMap *root, char *name) {    // Get a plaer (node) from a name
+node *getHM(HashMap *root, char *name) {
     Tree *seekedPlayer = NULL;
     node *seek = NULL;
 
@@ -53,7 +53,7 @@ node *getHM(HashMap *root, char *name) {    // Get a plaer (node) from a name
 }
 
 
-int removeHM(HashMap *root, char *name){    // Delete a player
+int removeHM(HashMap *root, char *name){
     node *playerDelete = NULL;
     Tree *firstOfStack = NULL;
 
@@ -75,21 +75,24 @@ int removeHM(HashMap *root, char *name){    // Delete a player
         return -1;
     }
     if (isInStack(root->proot,playerDelete) == 1){ // If have next in stack -> easy delete
-        printf("next\n");
+        //printf("next\n");
+        root->size--;
         return removeNode(&(firstOfStack->elmt),name);
 
     } else if(isTreeNode(root, playerDelete) == 0){    // If isn't tree node (no next) -> easy delete
-        printf("no node no next\n");
+        //printf("no node no next\n");
+        root->size--;
         return removeNode(&(firstOfStack->elmt),name);
 
     } else if(isTreeNode(root, playerDelete) == 1){    // If is tree node (no next) -> hard delete (recursive delete for tree node)
-        printf("node no next\n");
+        //printf("node no next\n");
+        root->size--;
         return removeABR(&(root->proot),name);
     }
     
 }
 
-int updateHM(HashMap *root, char *name, int newValue){ // Update values using getHM()
+int updateHM(HashMap *root, char *name, int newValue){
     node * seekedPlayer = NULL;
     if (root == NULL){
         printf("\e[0;31mProblem in updateHM, root is NULL\e[0;37m\n");
@@ -113,7 +116,7 @@ int updateHM(HashMap *root, char *name, int newValue){ // Update values using ge
 
 
 
-void prefixe(Tree *root) {  // recursive call to print Tree
+void prefixe(Tree *root) { 
     if (root != NULL) {
         prefixe(root->left);
         displayStack(root->elmt);  
@@ -121,9 +124,9 @@ void prefixe(Tree *root) {  // recursive call to print Tree
     }
 }
 
-void prefixeHM(HashMap *root){  //  Print the tree
+void prefixeHM(HashMap *root){
 
-    printf("\n\e[0;34mVisualisation de la hashmap: \e[0;37m\n");
+    printf("\n\e[0;34mHashMap: \e[0;37m\n");
     if (root == NULL){
         printf("\e[0;31mProblem in prefixeHM, root is NULL\e[0;37m\n");
         exit(1);
@@ -133,11 +136,11 @@ void prefixeHM(HashMap *root){  //  Print the tree
 }
 
 
-int sizeHM(HashMap *root){  // Return HM size
+int sizeHM(HashMap *root){ 
     return root->size;
 }
 
-void freeTree(Tree *root) { // free TREE
+void freeTree(Tree *root) { 
     if (root != NULL){
         freeTree(root->left);
         free(root);
@@ -145,13 +148,13 @@ void freeTree(Tree *root) { // free TREE
     }
 }
 
-void freeHashMap(HashMap *root) {   // Free HM
+void freeHashMap(HashMap *root) { 
     if (root != NULL) {
         freeTree(root->proot);
     }
 }
 
-int isTreeNode(HashMap *root, node *player){    // To check if the player is a Tree node (first player of a stack)
+int isTreeNode(HashMap *root, node *player){ 
     if (root == NULL){
         printf("\e[0;31mProblem in isTreeNode, root is NULL\e[0;37m\n");
         return 0;

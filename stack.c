@@ -2,8 +2,13 @@
 #include "hashtable.h"
 #include "tree.h"
 
-
-void addStack(node * player, node *playerToAdd) {   // Add a player to the end of the stack
+/**
+ * @brief adzazdazd
+ * 
+ * @param player 
+ * @param playerToAdd 
+ */
+void addStack(node * player, node *playerToAdd) {   
     if (player == NULL || playerToAdd == NULL) {
         printf("\e[0;31mProblem in addStack function, root or playerToAdd is NULL \e[0;37m");
         exit(2);
@@ -18,7 +23,7 @@ void addStack(node * player, node *playerToAdd) {   // Add a player to the end o
     player->next = playerToAdd;
 }
 
-node *getstack(node *firstnode,char *name){ // Get a player (node) from his name
+node *getstack(node *firstnode,char *name){ 
     node *tmp = firstnode;
     while(tmp != NULL){
         if (strcmp(name,tmp->name) == 0){
@@ -30,7 +35,7 @@ node *getstack(node *firstnode,char *name){ // Get a player (node) from his name
 }
 
 
-int displayStack(node *player){    // Display a stack (colision on the same key)
+int displayStack(node *player){
     if (player == NULL){
         printf("\e[0;31mProblem in displayStack, player is NULL\e[0;37m");
         return 0;
@@ -46,7 +51,7 @@ int displayStack(node *player){    // Display a stack (colision on the same key)
     return 1;
 }
 
-int removeNode(node **player, char *name) {     // Remove a player without touching the tree 
+int removeNode(node **player, char *name) {     
     if (*player == NULL || name == NULL) {
         printf("\e[0;31mProblem in removeNode, player or name is NULL\e[0;37m\n");
         return 0;

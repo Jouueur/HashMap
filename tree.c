@@ -2,7 +2,7 @@
 #include "stack.h"
 #include "hashtable.h"
 
-Tree *createnode(node *player){ // Create a node
+Tree *createnode(node *player){
     Tree* newNode = malloc(sizeof(Tree));    
     if (newNode == NULL){
         printf("\e[0;31mProblem in createnode");
@@ -16,7 +16,7 @@ Tree *createnode(node *player){ // Create a node
     return newNode;
 }
 
-Tree* addABR(Tree *root, node *player, int HashedKey) { // Add to the ABR
+Tree* addABR(Tree *root, node *player, int HashedKey) { 
     if (root == NULL) {
         return createnode(player);
     }
@@ -32,7 +32,7 @@ Tree* addABR(Tree *root, node *player, int HashedKey) { // Add to the ABR
     return root;
 }
 
-Tree *getABR(Tree *root, int key){     // Get to the good hashed ked
+Tree *getABR(Tree *root, int key){
     
     if (root == NULL || key == root->key) {
         return root;
@@ -45,7 +45,7 @@ Tree *getABR(Tree *root, int key){     // Get to the good hashed ked
 }
 
 
-int removeABR(Tree **root, char *name) {    // Remove a player from the hashmap
+int removeABR(Tree **root, char *name) {    
     int keyToRemove = hash(name);   
     Tree *PlayerInStack = getABR(*root,keyToRemove); // PlayerInStack is the first player of the stack of the hashed key
     node *Player = NULL;
@@ -86,7 +86,7 @@ int removeABR(Tree **root, char *name) {    // Remove a player from the hashmap
 }
 
 
-Tree *findMin(Tree *root) { // Find the smallest for removeHM
+Tree *findMin(Tree *root) {
     if (root == NULL) {
         return NULL;
     }
