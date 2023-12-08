@@ -18,10 +18,9 @@ debug:
 $(LIBRARY): $(OBJ)
 	gcc -shared -o $@ $^
 
-
-
 $(EXECUTABLE): main.o $(LIBRARY)
-	export LD_LIBRARY_PATH=.; gcc -fsanitize=address $< -L. -lmario -o $@
+	gcc -fsanitize=address -o $@ main.o -L. -lmario -Wl,-rpath,'$$ORIGIN'
+
 
 doc:
 	doxygen Doxyfile
