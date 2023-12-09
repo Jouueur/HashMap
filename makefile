@@ -3,7 +3,7 @@ OBJ=$(SRC:.c=.o)
 INC=$(wildcard *.h)
 
 LIBRARY=libmario.so
-EXECUTABLE=execlib
+EXECUTABLE=exec
 
 all: $(LIBRARY) $(EXECUTABLE)
 
